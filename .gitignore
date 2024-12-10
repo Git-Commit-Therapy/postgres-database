@@ -1,4 +1,2 @@
-!.env.example
 .env
-.env.*
 .idea/**
