@@ -7,7 +7,7 @@ services:
     container_name: SA-PostgreSQL
     volumes:
       - ./docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
-      - ./postgres-db-data:/var/lib/postgresql/data
+      - postgres-db-data:/var/lib/postgresql/data
     shm_size: 128mb
     ports:
       - 5432:5432
@@ -18,10 +18,13 @@ services:
     networks:
       - db_network
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready"]
+      test: ["CMD-SHELL", "pg_isready -d $$POSTGRES_DB -U $$POSTGRES_USER"]
       interval: 10s
       timeout: 5s
       retries: 5
 networks:
   db_network:
     driver: bridge
+
+volumes:
+  postgres-db-data:
