@@ -70,7 +70,8 @@ CREATE TABLE IF NOT EXISTS "MedicalExam" (
     "PatientID" CHAR(16) REFERENCES "Patient"("PatientID"),
     "MedicalEvent" SERIAL REFERENCES "MedicalEvent"("EventID")
 );
-
+DO $$
+BEGIN
 INSERT INTO "Ward" ("WardID", "Name") VALUES (1, 'Psychiatry');
 INSERT INTO "Ward" ("WardID", "Name") VALUES (2, 'Post-Operative Recovery');
 INSERT INTO "Ward" ("WardID", "Name") VALUES (3, 'Infectious Diseases');
@@ -512,3 +513,6 @@ INSERT INTO "MedicalExam" ("DateTime", "MedicalReport", "ExamType", "DoctorID", 
 INSERT INTO "MedicalExam" ("DateTime", "MedicalReport", "ExamType", "DoctorID", "PatientID", "MedicalEvent") VALUES ('2007-06-28 00:00:00', 'State play American any officer nice present.', 'Blood Test', 'CHPCRY710647VT', 'LVRBTH940646GU', 94);
 INSERT INTO "MedicalExam" ("DateTime", "MedicalReport", "ExamType", "DoctorID", "PatientID", "MedicalEvent") VALUES ('2005-03-07 00:00:00', 'Notice myself head increase agency bed.', 'MRI', 'BTSMNC470430WY', 'LSNBRB791126MT', 3);
 INSERT INTO "MedicalExam" ("DateTime", "MedicalReport", "ExamType", "DoctorID", "PatientID", "MedicalEvent") VALUES ('2023-06-21 00:00:00', 'Prepare common wrong what.', 'X-Ray', 'MRTBRN570846IN', 'DZIJRM900228MO', 86);
+EXCEPTION
+    WHEN duplicate_object THEN null;
+END $$;
