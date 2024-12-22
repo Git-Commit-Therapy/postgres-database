@@ -114,7 +114,7 @@ with open("generate_data.sql", "w") as file:
         dob = fake.date_of_birth(minimum_age=18, maximum_age=80)
         gender = random.choice(["M", "F"])
         place_code = fake.state_abbr()  # Random state code as a placeholder
-
+        email = fake.email();
         codice_fiscale = generate_codice_fiscale(name, surname, dob, gender, place_code)
         sid = generate_sid()
         phone_number = generate_phone_number()
@@ -126,6 +126,7 @@ with open("generate_data.sql", "w") as file:
             "DateOfBirth": dob,
             "SID": sid,
             "PhoneNumber": phone_number,
+            "Email": email,
         }
         users.append(user)
 
@@ -146,9 +147,9 @@ with open("generate_data.sql", "w") as file:
     # Write SQL INSERT Statements for Users
     for user in users:
         file.write(
-            f'INSERT INTO "User" ("ID", "Name", "Surname", "DateOfBirth", "SID", "PhoneNumber") '
+            f'INSERT INTO "User" ("ID", "Name", "Surname", "DateOfBirth", "SID", "PhoneNumber", "Email") '
             f"VALUES ('{user['ID']}', '{user['Name']}', '{user['Surname']}', '{user['DateOfBirth']}', "
-            f"'{user['SID']}', '{user['PhoneNumber']}');\n"
+            f"'{user['SID']}', '{user['PhoneNumber']}', {user['Email']});\n"
         )
 
     # Write SQL INSERT Statements for Staff
