@@ -16,8 +16,8 @@ CREATE TABLE IF NOT EXISTS "User" (
     "Surname" TEXT NOT NULL,
     "DateOfBirth" DATE NOT NULL,
     "SID" CHAR(50) NOT NULL UNIQUE,
-    "PhoneNumber" CHAR(15)
-    "Email" CHAR(64) NOT NULL UNIQUE,
+    "PhoneNumber" CHAR(15),
+    "Email" CHAR(64) NOT NULL UNIQUE
 );
 
 CREATE INDEX IF NOT EXISTS idx_user_id ON "User"("ID");
