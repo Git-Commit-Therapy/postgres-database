@@ -23,6 +23,17 @@ services:
       timeout: 5s
       retries: 5
 
+  pgadmin:
+    container_name: SA-pgadmin
+    image: dpage/pgadmin4:latest
+    ports:
+      - 8081:80
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
+    networks:
+      - db_network
+
 networks:
   db_network:
     driver: bridge
